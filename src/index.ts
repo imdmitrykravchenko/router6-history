@@ -28,7 +28,7 @@ const historyMiddleware =
       if (type === 'push') {
         history.push(payload);
       }
-      next();
+      return next();
     };
   };
 
