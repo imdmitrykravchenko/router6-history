@@ -1,6 +1,6 @@
 {
   "name": "router6-history",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "better router5",
   "main": "dist/index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "author": "Dmitry Kravchenko",
   "license": "ISC",
   "peerDependencies": {
-    "router6": "git+https://git@github.com/imdmitrykravchenko/router6.git",
+    "router6": "0.0.1",
     "url": "^0.11.0"
   },
   "devDependencies": {

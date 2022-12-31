@@ -1,16 +1,18 @@
 import { createBrowserHistory, BrowserHistoryOptions } from 'history';
 import url from 'url';
-import { RouteMiddleware } from 'router6/src';
+import { RouteMiddleware } from 'router6';
 
 const historyMiddleware =
   (options?: BrowserHistoryOptions): RouteMiddleware =>
   (router) => {
     const history = createBrowserHistory(options);
+    let silent = false;
 
     history.listen(({ action, location }) => {
       if (action === 'POP') {
+        silent = true;
         router.navigateToPath(`${location.pathname}${location.search}`, {
-          type: 'pop',
+          type: 'push',
         });
       }
     });
@@ -22,12 +24,14 @@ const historyMiddleware =
 
       const payload = { search: search || '', pathname };
 
-      if (type === 'replace') {
+      if (!silent && type === 'replace') {
         history.replace(payload);
       }
-      if (type === 'push') {
+      if (!silent && type === 'push') {
         history.push(payload);
       }
+      silent = false;
+
       return next();
     };
   };
